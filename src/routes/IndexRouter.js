@@ -1,27 +1,37 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppRouter from "./AppRouter";
-import { selectToken } from "../redux/slices/authSlice";
+import { reauthenticate } from "../redux/slices/authSlice";
 import AuthRouter from "./AuthRouter";
+import { getToken } from "../helpers/localToken";
 
 const IndexRouter = () => {
-  const token = useSelector(selectToken, shallowEqual);
+  const localToken = getToken();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Refresh your last session
+    if (localToken) {
+      dispatch(reauthenticate(localToken));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Switch>
       <Route
         path="/auth"
         component={(props) =>
-          !token ? <AuthRouter {...props} /> : <Redirect to="/" />
+          !localToken ? <AuthRouter {...props} /> : <Redirect to="/" />
         }
       />
       <Route
         path="/"
         component={(props) =>
-          token ? <AppRouter {...props} /> : <Redirect to="/auth/login" />
+          localToken ? <AppRouter {...props} /> : <Redirect to="/auth/login" />
         }
       />
     </Switch>
