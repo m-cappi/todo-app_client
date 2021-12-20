@@ -13,7 +13,7 @@ const IndexRouter = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Refresh your last session
+    // Refreshes your last session
     if (localToken) {
       dispatch(reauthenticate(localToken));
     }
