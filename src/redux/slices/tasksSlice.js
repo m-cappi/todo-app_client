@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addTaskApi, getTasksApi, updateTaskApi } from "../../services/taskApi";
+import {
+  addTaskApi,
+  deleteTaskApi,
+  getTasksApi,
+  updateTaskApi
+} from "../../services/taskApi";
 
 const initialStateValue = [];
 
@@ -25,6 +30,16 @@ export const updateTask = createAsyncThunk(
   async ({ taskId, payload }, thunkAPI) => {
     const response = await updateTaskApi({ taskId, payload });
     return response.data;
+  }
+);
+
+export const deleteTask = createAsyncThunk(
+  "tasks/deleteTask",
+  async (taskId, thunkAPI) => {
+    const res = await deleteTaskApi(taskId);
+    // self assign taskId because server returns true/false/error
+    res.taskId = taskId;
+    return res;
   }
 );
 
@@ -65,6 +80,19 @@ export const tasksSlice = createSlice({
         state.value[index] = action.payload;
       })
       .addCase(updateTask.rejected, (state, action) => {
+        state.status = "error";
+      })
+      .addCase(deleteTask.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.status = "idle";
+        const newState = state.value.filter(
+          (task) => task.taskId !== action.payload.taskId
+        );
+        state.value = newState !== "" ? newState : initialStateValue;
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
         state.status = "error";
       });
   }

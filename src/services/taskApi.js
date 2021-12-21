@@ -6,3 +6,6 @@ export const addTaskApi = async (task) => apiService.post("/tasks", task);
 
 export const updateTaskApi = async ({ taskId, payload }) =>
   apiService.put(`/tasks/${taskId}`, payload);
+
+export const deleteTaskApi = async (taskId) =>
+  apiService.delete(`/tasks/${taskId}`);
