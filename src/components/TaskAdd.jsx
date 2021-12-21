@@ -9,11 +9,14 @@ import Spinner from "./Spinner";
 const TaskAdd = () => {
   const taskStatus = useSelector(selectTaskStatus);
   const dispatch = useDispatch();
+
   const initialValues = { summary: "" };
+
   const handleSubmit = (values) => {
     const payload = { summary: values.summary };
     dispatch(addTask(payload));
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -21,6 +24,7 @@ const TaskAdd = () => {
       validationSchema={NewTaskSchema}
     >
       <Form className="add-task">
+
         <div className="input-box">
           <Field
             type="text"
@@ -38,6 +42,7 @@ const TaskAdd = () => {
         <button type="submit">
           {taskStatus === "loading" ? <Spinner size="small" /> : "Agregar"}
         </button>
+
       </Form>
     </Formik>
   );

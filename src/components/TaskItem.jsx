@@ -1,9 +1,21 @@
 import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
+import TaskDelete from "./TaskDelete";
+import TaskToggle from "./TaskToggle";
 
 const TaskItem = ({ task }) => {
-  return <div>Hola Mundo</div>;
+  const { taskId, summary, completed } = task;
+
+  return (
+    <div>
+      <span>
+        {summary} {completed ? "hecha" : "pendiente"}
+      </span>
+      <TaskToggle taskId={taskId} completed={completed} />
+      <TaskDelete taskId={taskId} />
+    </div>
+  );
 };
 
 TaskItem.propTypes = {
