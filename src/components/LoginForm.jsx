@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -7,6 +7,7 @@ import { LoginSchema } from "../utils/formValidation";
 import { login } from "../redux/slices/authSlice";
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const initialValues = { email: "", password: "" };
   const handleSubmit = (values) => {
@@ -36,11 +37,20 @@ const LoginForm = () => {
         <div className="input-box">
           <label htmlFor="password">Contraseña</label>
           <Field
-            type="password"
+            type={showPassword ? "text" : "password"}
             className="input"
             name="password"
             id="password"
             required
+          />
+          <i
+            className={`bi ${
+              !showPassword ? "bi-eye" : "bi-eye-slash"
+            } toggle-password`}
+            role="button"
+            tabIndex={0}
+            onKeyPress={() => setShowPassword((c) => !c)}
+            onClick={() => setShowPassword((c) => !c)}
           />
           <ErrorMessage name="password">
             {(error) => <div className="alert">{error}</div>}
@@ -48,7 +58,7 @@ const LoginForm = () => {
         </div>
         <div className="input-box">
           <button type="submit" className="button button-primary">
-            Login
+            Inicia Sesion
           </button>
         </div>
         <span>

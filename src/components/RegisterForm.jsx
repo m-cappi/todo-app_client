@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../redux/slices/authSlice";
 import { RegisterSchema } from "../utils/formValidation";
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const initialValues = { email: "", password: "", confirmPassword: "" };
   const handleSubmit = (values) => {
@@ -37,11 +38,20 @@ const RegisterForm = () => {
         <div className="input-box">
           <label htmlFor="password">Contraseña</label>
           <Field
-            type="password"
+            type={showPassword ? "text" : "password"}
             className="input"
             name="password"
             id="password"
             required
+          />
+          <i
+            className={`bi ${
+              !showPassword ? "bi-eye" : "bi-eye-slash"
+            } toggle-password`}
+            role="button"
+            tabIndex={0}
+            onKeyPress={() => setShowPassword((c) => !c)}
+            onClick={() => setShowPassword((c) => !c)}
           />
           <ErrorMessage name="password">
             {(error) => <div className="alert">{error}</div>}
@@ -50,11 +60,20 @@ const RegisterForm = () => {
         <div className="input-box">
           <label htmlFor="confirmPassword">Contraseña</label>
           <Field
-            type="password"
+            type={showPassword ? "text" : "password"}
             className="input"
             name="confirmPassword"
             id="confirmPassword"
             required
+          />
+          <i
+            className={`bi ${
+              !showPassword ? "bi-eye" : "bi-eye-slash"
+            } toggle-password`}
+            role="button"
+            tabIndex={0}
+            onKeyPress={() => setShowPassword((c) => !c)}
+            onClick={() => setShowPassword((c) => !c)}
           />
           <ErrorMessage name="confirmPassword">
             {(error) => <div className="alert">{error}</div>}
