@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { NewTaskSchema } from "../utils/formValidation";
 
-const AddTask = () => {
+const TaskAdd = () => {
   const dispatch = useDispatch();
   const initialValues = { summary: "" };
   const handleSubmit = (values) => {
@@ -37,4 +37,4 @@ const AddTask = () => {
   );
 };
 
-export default AddTask;
+export default TaskAdd;

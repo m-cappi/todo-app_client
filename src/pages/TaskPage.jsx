@@ -1,18 +1,25 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectToken } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import TaskAdd from "../components/TaskAdd";
+import { removeToken } from "../helpers/localToken";
 import { getTasks } from "../redux/slices/tasksSlice";
 
 const TaskPage = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
   const handle = () => {
-    dispatch(getTasks(token));
+    dispatch(getTasks());
   };
+
   return (
     <div>
       <p>Task Page</p>
-      <button type="button" onClick={handle}>Get Tasks</button>
+      <TaskAdd />
+      <button type="button" onClick={handle}>
+        Get Tasks
+      </button>
+      <button type="button" onClick={removeToken}>
+        Remove Token
+      </button>
     </div>
   );
 };
