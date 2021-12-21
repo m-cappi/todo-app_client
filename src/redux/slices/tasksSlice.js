@@ -30,21 +30,42 @@ export const updateTask = createAsyncThunk(
 
 export const tasksSlice = createSlice({
   name: "tasks",
-  initialState: { value: initialStateValue },
+  initialState: { value: initialStateValue, status: "idle" },
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getTasks.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(getTasks.fulfilled, (state, action) => {
+        state.status = "idle";
         state.value = action.payload;
       })
+      .addCase(getTasks.rejected, (state, action) => {
+        state.status = "error";
+      })
+      .addCase(addTask.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(addTask.fulfilled, (state, action) => {
+        state.status = "idle";
         state.value.unshift(action.payload);
       })
+      .addCase(addTask.rejected, (state, action) => {
+        state.status = "error";
+      })
+      .addCase(updateTask.pending, (state, action) => {
+        state.status = "loading";
+      })
       .addCase(updateTask.fulfilled, (state, action) => {
+        state.status = "idle";
         const index = state.value
           .map((task) => task.taskId)
           .indexOf(action.payload.taskId);
         state.value[index] = action.payload;
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.status = "error";
       });
   }
 });
@@ -52,3 +73,4 @@ export const tasksSlice = createSlice({
 export default tasksSlice.reducer;
 
 export const selectTasks = (state) => state.tasks.value;
+export const selectTaskStatus = (state) => state.tasks.status;
