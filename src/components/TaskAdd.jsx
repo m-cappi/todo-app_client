@@ -1,15 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, selectTaskStatus } from "../redux/slices/tasksSlice";
 import { NewTaskSchema } from "../utils/formValidation";
+import Spinner from "./Spinner";
 
 const TaskAdd = () => {
+  const taskStatus = useSelector(selectTaskStatus);
   const dispatch = useDispatch();
   const initialValues = { summary: "" };
   const handleSubmit = (values) => {
     const payload = { summary: values.summary };
-    // dispatch(addTask(payload));
+    dispatch(addTask(payload));
   };
   return (
     <Formik
@@ -31,7 +34,10 @@ const TaskAdd = () => {
             {(error) => <div className="alert">{error}</div>}
           </ErrorMessage>
         </div>
-        <button type="submit">Agregar</button>
+
+        <button type="submit">
+          {taskStatus === "loading" ? <Spinner size="small" /> : "Agregar"}
+        </button>
       </Form>
     </Formik>
   );
