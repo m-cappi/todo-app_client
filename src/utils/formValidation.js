@@ -17,11 +17,11 @@ const confirmationPasswordRule = (match) =>
     .required("Password confirmation is required!")
     .oneOf([yup.ref(match), null], "Passwords must match");
 
-// const nameRule = yup
-//   .string()
-//   .required('You need a name!')
-//   .min(2, 'Too short!')
-//   .max(30, 'Too long! (max 30 char)');
+const taskRule = yup
+  .string()
+  .required('You need a task!')
+  .min(2, 'Too short!')
+  .max(30, 'Too long! (max 30 char)');
 
 export const RegisterSchema = yup.object().shape({
   email: emailRule,
@@ -39,4 +39,4 @@ export const LoginSchema = yup
 //   newConfirmationPassword: confirmationPasswordRule('newPassword'),
 // });
 
-// export const NameChangeSchema = yup.object().shape({displayName: nameRule});
+export const NewTaskSchema = yup.object().shape({summary: taskRule});
