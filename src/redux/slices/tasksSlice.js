@@ -37,9 +37,11 @@ export const deleteTask = createAsyncThunk(
   "tasks/deleteTask",
   async (taskId, thunkAPI) => {
     const res = await deleteTaskApi(taskId);
-    // self assign taskId because server returns true/false/error
-    res.taskId = taskId;
-    return res;
+    // self assign taskId because server returns "" on success due to 204 status
+    if (res.data === "") {
+      res.data = taskId;
+    }
+    return res.data;
   }
 );
 
@@ -88,7 +90,7 @@ export const tasksSlice = createSlice({
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.status = "idle";
         const newState = state.value.filter(
-          (task) => task.taskId !== action.payload.taskId
+          (task) => task.taskId !== action.payload
         );
         state.value = newState !== "" ? newState : initialStateValue;
       })
