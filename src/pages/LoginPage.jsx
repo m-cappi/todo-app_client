@@ -2,13 +2,10 @@ import React from "react";
 import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
-
-
   return (
-    <div>
-      <p>Login page</p>
+    <main>
       <LoginForm />
-    </div>
+    </main>
   );
 };
 

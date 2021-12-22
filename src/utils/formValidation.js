@@ -21,7 +21,7 @@ const taskRule = yup
   .string()
   .required('You need a task!')
   .min(2, 'Too short!')
-  .max(30, 'Too long! (max 30 char)');
+  .max(50, 'Too long! (max 50 char)');
 
 export const RegisterSchema = yup.object().shape({
   email: emailRule,
