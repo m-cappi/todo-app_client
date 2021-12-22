@@ -14,7 +14,7 @@ const TaskDelete = ({ taskId }) => {
   return (
     <button type="button" className="trash-btn" onClick={handleDelete}>
       <i className="bi bi-trash icon" />
-      <span>Delete</span>
+      <span>Borrar</span>
     </button>
   );
 };

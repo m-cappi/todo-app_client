@@ -18,6 +18,9 @@ const TaskAdd = () => {
     resetForm(initialValues);
   };
 
+  // if the app is waiting for the server, it disables the add button and shows a spinner
+  const isLoading = taskStatus === "loading";
+
   return (
     <Formik
       initialValues={initialValues}
@@ -35,8 +38,8 @@ const TaskAdd = () => {
             required
             maxlength="50"
           />
-          <button type="submit" className="btn-add">
-            {taskStatus === "loading" ? (
+          <button type="submit" className="btn-add" disabled={isLoading}>
+            {isLoading ? (
               <Spinner size="small" />
             ) : (
               <>

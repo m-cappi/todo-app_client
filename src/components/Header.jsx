@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header>
       {token && <Logout />}
-      <h1>Todo List</h1>
+      <h1>Mi Lista de Tareas</h1>
     </header>
   );
 };

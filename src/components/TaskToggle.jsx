@@ -17,7 +17,7 @@ const TaskToggle = ({ taskId, completed }) => {
   return (
     <button type="button" className="complete-btn" onClick={toggleComplete}>
       <i className={icon} />
-      <span>Toggle</span>
+      <span>{completed ? "Desmarcar" : "Completar"}</span>
     </button>
   );
 };
