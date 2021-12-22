@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App snapshot test 1`] = `
+Array [
+  <header>
+    <h1>
+      Mi Lista de Tareas
+    </h1>
+  </header>,
+  <footer>
+    <p>
+      by 
+      <a
+        href="https://github.com/nepha199"
+      >
+        Martin Cappi Dahl
+      </a>
+    </p>
+  </footer>,
+]
+`;
