@@ -6,7 +6,6 @@
 .add-task {
   @include flex-center(10vh);
   flex-direction: column;
-  
 
   .alert {
     font-size: $font-size-default;
@@ -20,6 +19,8 @@
     background: $color-white;
   }
   button {
+    display: inline-flex;
+    gap: $spacing-xs;
     color: #ff6f47;
     background: #f7fffe;
     cursor: pointer;

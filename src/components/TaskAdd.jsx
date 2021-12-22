@@ -12,9 +12,10 @@ const TaskAdd = () => {
 
   const initialValues = { summary: "" };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { resetForm }) => {
     const payload = { summary: values.summary };
     dispatch(addTask(payload));
+    resetForm(initialValues);
   };
 
   return (
@@ -24,7 +25,6 @@ const TaskAdd = () => {
       validationSchema={NewTaskSchema}
     >
       <Form className="add-task">
-
         <div className="input-box">
           <Field
             type="text"
@@ -34,15 +34,20 @@ const TaskAdd = () => {
             placeholder="Tarea nueva..."
             required
           />
-          <ErrorMessage name="summary">
-            {(error) => <div className="alert">{error}</div>}
-          </ErrorMessage>
+          <button type="submit" className="btn-add">
+            {taskStatus === "loading" ? (
+              <Spinner size="small" />
+            ) : (
+              <>
+                <i className="bi bi-calendar-plus" />
+                <span>Agregar</span>
+              </>
+            )}
+          </button>
         </div>
-
-        <button type="submit">
-          {taskStatus === "loading" ? <Spinner size="small" /> : "Agregar"}
-        </button>
-
+        <ErrorMessage name="summary">
+          {(error) => <div className="alert">{error}</div>}
+        </ErrorMessage>
       </Form>
     </Formik>
   );

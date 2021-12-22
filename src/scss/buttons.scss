@@ -1,6 +1,6 @@
 button:not(.btn-add) {
   display: inline-flex;
-gap: $spacing-xs;
+  gap: $spacing-xs;
   border-radius: $border-radius-sm;
   font-size: $font-size-small;
   font-weight: 600;
@@ -9,7 +9,7 @@ gap: $spacing-xs;
   cursor: pointer;
   text-decoration: none;
   border: none;
-  
+
   padding: $spacing-xs $spacing-xl;
   &:hover {
     color: lighten($color: #b19f02, $amount: 10);
@@ -17,7 +17,6 @@ gap: $spacing-xs;
   @media (min-width: $breakpoint-lg) {
     padding: $spacing-xs $spacing-xxl;
     font-size: $font-size-default;
-
   }
 }
 .trash-btn,
