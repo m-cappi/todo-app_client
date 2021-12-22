@@ -2,17 +2,26 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { register } from "../redux/slices/authSlice";
 import { RegisterSchema } from "../utils/formValidation";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
+
   const initialValues = { email: "", password: "", confirmPassword: "" };
+  const from = location.state?.from?.pathname || "/";
+
   const handleSubmit = (values) => {
     const payload = { email: values.email, password: values.password };
-    dispatch(register(payload));
+    dispatch(register(payload))
+      .unwrap()
+      .then(() => {
+        navigate(from, { replace: true });
+      });
   };
 
   return (
@@ -21,7 +30,7 @@ const RegisterForm = () => {
       validationSchema={RegisterSchema}
       onSubmit={handleSubmit}
     >
-      <Form>
+      <Form className="auth">
         <div className="input-box">
           <label htmlFor="email">Email</label>
           <Field
@@ -37,44 +46,48 @@ const RegisterForm = () => {
         </div>
         <div className="input-box">
           <label htmlFor="password">Contraseña</label>
-          <Field
-            type={showPassword ? "text" : "password"}
-            className="input"
-            name="password"
-            id="password"
-            required
-          />
-          <i
-            className={`bi ${
-              !showPassword ? "bi-eye" : "bi-eye-slash"
-            } toggle-password`}
-            role="button"
-            tabIndex={0}
-            onKeyPress={() => setShowPassword((c) => !c)}
-            onClick={() => setShowPassword((c) => !c)}
-          />
+          <div>
+            <Field
+              type={showPassword ? "text" : "password"}
+              className="input"
+              name="password"
+              id="password"
+              required
+            />
+            <i
+              className={`bi ${
+                !showPassword ? "bi-eye" : "bi-eye-slash"
+              } toggle-password`}
+              role="button"
+              tabIndex={0}
+              onKeyPress={() => setShowPassword((c) => !c)}
+              onClick={() => setShowPassword((c) => !c)}
+            />
+          </div>
           <ErrorMessage name="password">
             {(error) => <div className="alert">{error}</div>}
           </ErrorMessage>
         </div>
         <div className="input-box">
-          <label htmlFor="confirmPassword">Contraseña</label>
-          <Field
-            type={showPassword ? "text" : "password"}
-            className="input"
-            name="confirmPassword"
-            id="confirmPassword"
-            required
-          />
-          <i
-            className={`bi ${
-              !showPassword ? "bi-eye" : "bi-eye-slash"
-            } toggle-password`}
-            role="button"
-            tabIndex={0}
-            onKeyPress={() => setShowPassword((c) => !c)}
-            onClick={() => setShowPassword((c) => !c)}
-          />
+          <label htmlFor="confirmPassword">Confirmar contraseña</label>
+          <div>
+            <Field
+              type={showPassword ? "text" : "password"}
+              className="input"
+              name="confirmPassword"
+              id="confirmPassword"
+              required
+            />
+            <i
+              className={`bi ${
+                !showPassword ? "bi-eye" : "bi-eye-slash"
+              } toggle-password`}
+              role="button"
+              tabIndex={0}
+              onKeyPress={() => setShowPassword((c) => !c)}
+              onClick={() => setShowPassword((c) => !c)}
+            />
+          </div>
           <ErrorMessage name="confirmPassword">
             {(error) => <div className="alert">{error}</div>}
           </ErrorMessage>
