@@ -33,6 +33,7 @@ const TaskAdd = () => {
             id="summary"
             placeholder="Tarea nueva..."
             required
+            maxlength="50"
           />
           <button type="submit" className="btn-add">
             {taskStatus === "loading" ? (

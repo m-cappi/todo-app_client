@@ -38,6 +38,7 @@ const LoginForm = () => {
             name="email"
             id="email"
             required
+            maxlength="100"
           />
           <ErrorMessage name="email">
             {(error) => <div className="alert">{error}</div>}
@@ -52,6 +53,7 @@ const LoginForm = () => {
               name="password"
               id="password"
               required
+              maxlength="30"
             />
             <i
               className={`bi ${

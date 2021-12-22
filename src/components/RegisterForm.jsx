@@ -39,6 +39,7 @@ const RegisterForm = () => {
             name="email"
             id="email"
             required
+            maxlength="100"
           />
           <ErrorMessage name="email">
             {(error) => <div className="alert">{error}</div>}
@@ -53,6 +54,7 @@ const RegisterForm = () => {
               name="password"
               id="password"
               required
+              maxlength="30"
             />
             <i
               className={`bi ${
@@ -77,6 +79,7 @@ const RegisterForm = () => {
               name="confirmPassword"
               id="confirmPassword"
               required
+              maxlength="30"
             />
             <i
               className={`bi ${
