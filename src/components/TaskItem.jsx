@@ -8,9 +8,9 @@ const TaskItem = ({ task }) => {
   const { taskId, summary, completed } = task;
 
   return (
-    <div>
-      <span>
-        {summary} {completed ? "hecha" : "pendiente"}
+    <div className={`todo-item ${completed ? "completed" : ""}`}>
+      <span className={`description ${completed ? "completed" : ""}`}>
+        {summary}
       </span>
       <TaskToggle taskId={taskId} completed={completed} />
       <TaskDelete taskId={taskId} />

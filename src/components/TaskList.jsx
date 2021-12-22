@@ -1,5 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectToken } from "../redux/slices/authSlice";
 import {
   getTasks,
   selectTasks,
@@ -12,19 +14,27 @@ const TaskList = () => {
   const tasks = useSelector(selectTasks);
   const taskStatus = useSelector(selectTaskStatus);
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(getTasks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
-  // eslint-disable-next-line no-nested-ternary
-  return tasks.length > 0 ? (
-    tasks.map((task) => <TaskItem task={task} key={task.taskId} />)
-  ) : taskStatus === "loading" ? (
-    <Spinner />
-  ) : (
-    <span>Empty</span>
+  return (
+    <div className="todo-container">
+      {tasks.length > 0 ? (
+        <div className="todo-list">
+          {tasks.map((task) => (
+            <TaskItem task={task} key={task.taskId} />
+          ))}
+        </div>
+      ) : taskStatus === "loading" ? (
+        <Spinner />
+      ) : (
+        <span>Empty</span>
+      )}
+    </div>
   );
 };
 

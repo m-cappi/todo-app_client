@@ -12,9 +12,12 @@ const TaskToggle = ({ taskId, completed }) => {
     dispatch(updateTask({ taskId, payload }));
   };
 
+  const icon = completed ? "bi bi-calendar-check-fill" : "bi bi-calendar";
+
   return (
-    <button type="button" onClick={toggleComplete}>
-      Toggle
+    <button type="button" className="complete-btn" onClick={toggleComplete}>
+      <i className={icon} />
+      <span>Toggle</span>
     </button>
   );
 };

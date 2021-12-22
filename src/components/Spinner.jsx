@@ -3,16 +3,16 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
 
-const Spinner2 = ({ size }) => {
+const Spinner = ({ size }) => {
   return <div className={`loading-spinner ${size}`}></div>;
 };
 
-Spinner2.propTypes = {
+Spinner.propTypes = {
   size: PropTypes.oneOf(["small", "medium", "large"])
 };
 
-Spinner2.defaultProps = {
+Spinner.defaultProps = {
   size: null
 };
 
-export default Spinner2;
+export default Spinner;
