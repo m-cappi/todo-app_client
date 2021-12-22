@@ -1,0 +1,48 @@
+@import "./vars";
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  outline: none;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $font-primary;
+  width: 100%;
+  min-height: 100vh;
+  font-size: 1rem;
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  color: $color-white;
+}
+
+header {
+  @include flex-center();
+  font-size: $font-size-large;
+}
+
+main {
+  min-height: 75vh;
+  font-size: $font-size-medium;
+}
+
+footer {
+  @include flex-center(5vh);
+  position: relative;
+  bottom: 0;
+  width: 100vw;
+  font-size: $font-size-default;
+}
+
+@import "./buttons";
+@import "./forms";
+@import "./spinner";
+@import "./list";
+@import "./auth";

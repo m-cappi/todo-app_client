@@ -1,0 +1,53 @@
+.login {
+}
+.register {
+}
+.auth {
+  @include flex-center();
+  flex-direction: column;
+  gap: $spacing-md;
+
+  .input-box {
+    position: relative;
+    margin: 0.2rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .input {
+      border-radius: 0.5rem;
+      outline: none;
+      padding: 0.3rem 0.7rem;
+      font-size: 1.8rem;
+      resize: none;
+      border: none;
+      box-shadow: $shadow;
+    }
+
+    .alert {
+      background-color: $color-red;
+      border-radius: 0 0 0.5rem 0.5rem;
+      padding: 0.5rem;
+      margin-top: -0.5rem;
+      font-size: 1.3rem;
+      color: $color-white;
+    }
+  }
+
+  i {
+    position: relative;
+    right: 10px;
+    color: #21212c;
+    font-size: $font-size-large;
+  }
+}
+.logout {
+  position: absolute;
+  top: 3vh;
+  right: 3vw;
+}
