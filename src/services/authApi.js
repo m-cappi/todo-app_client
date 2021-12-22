@@ -1,4 +1,5 @@
 import { removeToken, setToken } from "../helpers/localToken";
+import authHeader from "../utils/authHeaders";
 import apiService from "./server";
 
 export const loginApi = async (user) =>
@@ -18,7 +19,7 @@ export const registerApi = async (user) =>
   });
 
 export const reauthenticateApi = async () =>
-  apiService.get("/auth/me").catch((err) => {
+  apiService.get("/auth/me", { headers: authHeader() }).catch((err) => {
     removeToken();
     // throw error, otherwise reducer doesn't get rejected and crashes without value
     throw new Error(err);
